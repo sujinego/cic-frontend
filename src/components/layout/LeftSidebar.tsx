@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getAuthState, subscribeAuthChanged, logout, type AuthState } from "../../features/Login/auth";
-import footerLogo from '../../assets/images/footer/footer.png';
+import footerLogo from '../../../public/images/footer/footer.png';
 
 type LeftSidebarProps = {
     isHome: boolean;

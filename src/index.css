@@ -2,8 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    font-size: 16px; /* rem의 기준점을 16px로 강제 고정 */
+    -webkit-text-size-adjust: 100%; /* 아이폰 등에서 가로 모드 시 폰트 커짐 방지 */
+    height: 100%;
+    margin: 0;
+}
 /* 전체 문서 높이 100%로 고정 */
-html,
 body,
 #root {
     height: 100%;

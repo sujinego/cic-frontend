@@ -10,11 +10,22 @@ export default function PublicProjectDetailPage() {
 
     useEffect(() => {
         if (!projectId) return;
-        getPublicProject(Number(projectId)).then(res => {
-                console.log("api응답", res.data);
+
+        getPublicProject(Number(projectId))
+            .then(res => {
                     setProject(res.data);
+            })
+            .catch(err => {
+                console.error("데이터 로딩 실패:", err);
             });
     }, [projectId]);
+
+    if (!project) {
+        return <div>로딩중...</div>;
+    }
+    if (!images || images.length === 0) {
+        return <div className="p-10">이미지 없음</div>;
+    }
 
     const handlePrev = () => {
         setCurrentIndex((prev) =>
@@ -28,12 +39,6 @@ export default function PublicProjectDetailPage() {
         );
     };
 
-    if (!project) {
-        return <div>로딩중</div>;
-    }
-    if (images.length === 0) {
-        return <div className="p-10">이미지 없음</div>;
-    }
 
     return (
         <div className="h-screen flex flex-col px-16 py-16">

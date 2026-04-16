@@ -23,7 +23,7 @@ export default function AdminProjectDetailPage() {
     const thumbnailSrc = thumbnail?.preview || thumbnail?.imageUrl || project?.thumbnailUrl;
 
 
-    function SortableItem({ img, index, currentIndex, setCurrentIndex }) {
+    function SortableItem({ img, index, currentIndex, setCurrentIndex } :any) {
         const {
             attributes,
             listeners,

@@ -40,12 +40,12 @@ export default function AdminProjectListPage() {
     return (
         <div className="h-full min-h-screen px-16 py-16">
             <div className="flex items-start justify-between gap-6 mb-6">
-                <h1 className="text-3xl font-cic font-light uppercase">
+                <h1 className="text-md md:text-3xl font-cic font-light uppercase">
                     프로젝트 리스트
                 </h1>
                 <button
                     type="button"
-                    className="px-4 py-2 rounded bg-zinc-800 text-white hover:bg-zinc-700 transition"
+                    className="px-3 py-1.5 bg-zinc-900 text-white rounded text-xs hover:bg-zinc-800 transition-colors"
                     onClick={() => navigate("/Admin/ProjectCreate")}
                 >
                     프로젝트 등록

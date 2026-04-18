@@ -1,6 +1,7 @@
 // src/features/home/pages/HomePage.tsx
 import { useEffect, useState } from "react";
 import {getHomeImageList} from "../../api/home.api.ts";
+import {optimizeImage} from "../../utils/imageUtils.ts";
 
 
 type Slide = {
@@ -10,12 +11,6 @@ type Slide = {
     isActive: boolean;
 };
 
-// 이미지 최적화
-const optimize = (url?: string) => {
-    if (!url) return "";
-    if (!url.includes("/upload/")) return url;
-    return url.replace("/upload/", "/upload/f_auto,q_auto,w_1920,c_limit/");
-};
 
 export default function HomePage() {
 
@@ -54,36 +49,34 @@ export default function HomePage() {
     }, [slides.length]);
 
     // 데이터 로딩 중이거나 이미지가 없을 때의 처리
-    if (isLoading) return <div className="min-h-screen bg-black" />;
+    if (isLoading) return <div className="min-h-screen bg-black"/>;
 
     return (
         <div className="relative min-h-screen">
-            {/* 메인 페이지에서만 전체 화면에 깔리는 배경 슬라이드 */}
             <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
                 {slides.length > 0 ? (
-                    slides.map((slide, i) => (
-                        <img
-                            key={slide.id}
-                            src={optimize(slide.imageUrl)}
-                            alt=""
-                            className={
-                                "absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] " +
-                                (i === index ? "opacity-100" : "opacity-0")
-                            }
-                        />
-                    ))
+                    slides.map((slide, i) => {
+                        const isFirst = i === 0; // 첫 번째 이미지인지 확인
+                        return (
+                            <img
+                                key={slide.id}
+                                src={optimizeImage(slide.imageUrl)}
+                                alt=""
+                                // 첫 번째 이미지는 즉시 로드(eager), 나머지는 천천히(lazy)
+                                loading={isFirst ? "eager" : "lazy"}
+                                // 브라우저에게 첫 번째 이미지의 우선순위가 높음을 알림
+                                fetchPriority={isFirst ? "high" : "low"}
+                                className={
+                                    "absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] " +
+                                    (i === index ? "opacity-100" : "opacity-0")
+                                }
+                            />
+                        );
+                    })
                 ) : (
-                    /* 이미지가 하나도 없을 때 보여줄 기본 배경 */
-                    <div className="absolute inset-0 bg-gray-800" />
+                    <div className="absolute inset-0 bg-gray-800"/>
                 )}
-
-                {/* 오버레이 (텍스트 가독성을 위해 살짝 어둡게) */}
-                <div className="absolute inset-0 bg-black/35" />
-            </div>
-
-            {/* 메인 컨텐츠가 들어갈 자리 */}
-            <div className="relative z-10">
-                {/* 여기에 메인 문구나 버튼 등을 추가하세요 */}
+                <div className="absolute inset-0 bg-black/35"/>
             </div>
         </div>
     );

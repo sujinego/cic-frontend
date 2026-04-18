@@ -7,7 +7,8 @@ import {DndContext, closestCenter} from "@dnd-kit/core";
 
 import {SortableContext, arrayMove, rectSortingStrategy ,useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import {uploadImage} from "../../../utils/upload.ts";
+import {uploadImages} from "../../../api/cloudinary.project.api.ts";
+
 
 
 export default function AdminProjectDetailPage() {
@@ -148,11 +149,11 @@ export default function AdminProjectDetailPage() {
 
             //  Cloudinary 업로드
             if (thumbnail?.file) {
-                thumbnailUrl = await uploadImage(thumbnail.file);
+                thumbnailUrl = await uploadImages(thumbnail.file);
             }
 
             const uploadedUrls = await Promise.all(
-                newFiles.map((img: any) => uploadImage(img.file))
+                newFiles.map((img: any) => uploadImages(img.file))
             );
 
             if (!thumbnail) {
@@ -197,7 +198,7 @@ export default function AdminProjectDetailPage() {
                 flex flex-col md:flex-row md:justify-between md:items-start gap-6">
 
                 {/* 좌측 */}
-                <div className="space-y-5 w-full md:max-w-xl">
+                <div className="space-y-5 w-full md:max-w-lg">
 
                     {/* 프로젝트 */}
                     <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
@@ -310,35 +311,43 @@ export default function AdminProjectDetailPage() {
                 <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto md:ml-6">
 
                     {!isEdit ? (
-                        <button
-                            onClick={() => setIsEdit(true)}
-                            className="w-full md:w-auto px-4 py-2 bg-black text-white rounded"
-                        >
-                            수정
-                        </button>
+                        <div className="flex gap-1.5">
+                            <button
+                                onClick={() => setIsEdit(true)}
+                                className="px-3 py-1.5 bg-zinc-900 text-white rounded text-xs hover:bg-zinc-800 transition-colors"
+                            >
+                                수정
+                            </button>
+                            <button
+                                onClick={() => navigate("/Admin/ProjectList")}
+                                className="px-3 py-1.5 border border-zinc-300 bg-zinc-100 text-zinc-700 rounded text-xs hover:bg-zinc-200"
+                            >
+                                목록
+                            </button>
+                        </div>
                     ) : (
-                        <>
+                        <div className="flex gap-1.5"> {/* 수정 모드일 때 버튼 간격 좁게 유지 */}
                             <button
                                 onClick={handleSave}
-                                className="w-full md:w-auto px-4 py-2 bg-blue-500 text-white rounded"
+                                className="px-3 py-1.5 bg-blue-600 text-white rounded text-xs hover:bg-blue-700 shadow-sm"
                             >
                                 저장
                             </button>
                             <button
                                 onClick={() => setIsEdit(false)}
-                                className="w-full md:w-auto px-4 py-2 border rounded bg-red-500 text-black"
+                                className="px-3 py-1.5 border border-zinc-300 bg-red-500 text-zinc-600 rounded text-xs hover:bg-zinc-50"
                             >
                                 취소
                             </button>
-                        </>
+                            <button
+                                onClick={() => navigate("/Admin/ProjectList")}
+                                className="px-3 py-1.5 border border-zinc-300 bg-zinc-100 text-zinc-700 rounded text-xs hover:bg-zinc-200"
+                            >
+                                목록
+                            </button>
+                        </div>
                     )}
 
-                    <button
-                        onClick={() => navigate("/Admin/ProjectList")}
-                        className="w-full md:w-auto px-4 py-2 border rounded bg-gray-300 text-black"
-                    >
-                        목록
-                    </button>
                 </div>
             </section>
 

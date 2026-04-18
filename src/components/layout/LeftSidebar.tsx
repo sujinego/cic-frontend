@@ -15,7 +15,7 @@ type SubMenu = {
 };
 
 type Menu = {
-    key: "Works" | "Studio" | "Contact" | "About" | "Admin" | "Login" | "MyProject" | "Logout";
+    key: "Works" | "News" | "Contact" | "About" | "Admin" | "Login" | "MyProject" | "Logout";
     label: string;
     sub?: SubMenu[];
     path?: string;
@@ -31,14 +31,7 @@ function buildMenus(auth: AuthState | null): Menu[] {
                 { label: "Furniture", path: "/Works/Furniture" },
             ],
         },
-        {
-            key: "Studio",
-            label: "Studio",
-            sub: [
-                { label: "News", path: "/Studio/News" },
-                { label: "Contract", path: "/Studio/Contract" },
-            ],
-        },
+        { key: "News", label: "News", path: "/News" },
         { key: "Contact", label: "Contact", path: "/Contact" },
         { key: "About", label: "About", path: "/About" },
     ];
@@ -81,7 +74,7 @@ function buildMenus(auth: AuthState | null): Menu[] {
         const routeMainKey = useMemo(() => {
             const path = location.pathname;
             if (path.startsWith("/Works")) return "Works";
-            if (path.startsWith("/Studio")) return "Studio";
+            if (path.startsWith("/News")) return "News";
             if (path.startsWith("/Contact")) return "Contact";
             if (path.startsWith("/About")) return "About";
             if (path.startsWith("/Admin")) return "Admin";
@@ -105,7 +98,7 @@ function buildMenus(auth: AuthState | null): Menu[] {
 
         return (
             <div className="flex flex-col justify-between h-full select-none">
-                <div className="pt-6 lg:pt-10">
+                <div className="pt-6">
                     {/* 로고: 해상도별 폰트 크기 최적화 */}
                     <div className="mb-6 lg:mb-8">
                         <p
@@ -117,7 +110,7 @@ function buildMenus(auth: AuthState | null): Menu[] {
                     </div>
 
                     <div
-                        className="flex pt-2 gap-4 lg:gap-8"
+                        className="flex pt-2"
                         onMouseLeave={() => setHovered(null)}
                     >
                         {/* 메인 메뉴: 고정 너비를 주어 서브메뉴 위치가 변하지 않게 함 */}
@@ -157,7 +150,7 @@ function buildMenus(auth: AuthState | null): Menu[] {
                             onMouseEnter={() => !hovered && routeMainKey && setHovered(routeMainKey)}
                         >
                             {activeMenu?.sub && (
-                                <ul className="space-y-1 lg:space-y-2">
+                                <ul className="space-y-1">
                                     {activeMenu.sub.map((item) => {
                                         const isActive = location.pathname === item.path;
                                         return (

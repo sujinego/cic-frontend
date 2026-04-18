@@ -2,7 +2,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import HomePage from "./features/home/HomePage";
-import ContactPage from "./features/studio/ContractPage";
+import ContactPage from "./features/contact/ContactPage";
 import LoginPage from "./features/Login/LoginPage.tsx";
 import NewsPage from "./features/studio/NewsPage";
 import FurniturePage from "./features/works/pages/FurniturePage";

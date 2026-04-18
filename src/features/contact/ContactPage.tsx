@@ -1,6 +1,6 @@
 export default function ContactPage() {
     return (
-        <div className="px-4 md:px-16 py-12 md:py-20 space-y-12 md:space-y-16">
+        <div className="px-4 md:px-16 py-12 md:py-12 space-y-12 md:space-y-16">
 
             {/* 제목 */}
             <section className="text-center space-y-3 md:space-y-4">
@@ -10,32 +10,6 @@ export default function ContactPage() {
                 <p className="text-sm md:text-base text-gray-500">
                     공간 상담을 신청해보세요
                 </p>
-            </section>
-
-            {/* 정보 */}
-            <section className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 text-center">
-
-                <div className="bg-white p-5 md:p-6 rounded-lg shadow-sm border">
-                    <p className="font-medium text-sm md:text-base">PHONE</p>
-                    <p className="text-gray-500 mt-1 text-sm md:text-base">
-                        010-1234-5678
-                    </p>
-                </div>
-
-                <div className="bg-white p-5 md:p-6 rounded-lg shadow-sm border">
-                    <p className="font-medium text-sm md:text-base">EMAIL</p>
-                    <p className="text-gray-500 mt-1 text-sm md:text-base">
-                        info@cic.com
-                    </p>
-                </div>
-
-                <div className="bg-white p-5 md:p-6 rounded-lg shadow-sm border">
-                    <p className="font-medium text-sm md:text-base">LOCATION</p>
-                    <p className="text-gray-500 mt-1 text-sm md:text-base">
-                        서울 강남구
-                    </p>
-                </div>
-
             </section>
 
             {/* 문의 폼 */}
@@ -49,6 +23,17 @@ export default function ContactPage() {
 
                 <input
                     placeholder="연락처"
+                    className="w-full border border-gray-300 p-3 rounded-md
+                    focus:outline-none focus:ring-2 focus:ring-black transition"
+                />
+
+                <input
+                    placeholder="주소"
+                    className="w-full border border-gray-300 p-3 rounded-md
+                    focus:outline-none focus:ring-2 focus:ring-black transition"
+                />
+                <input
+                    placeholder="예상 공사 시기"
                     className="w-full border border-gray-300 p-3 rounded-md
                     focus:outline-none focus:ring-2 focus:ring-black transition"
                 />

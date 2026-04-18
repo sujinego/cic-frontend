@@ -15,7 +15,7 @@ type SubMenu = {
 };
 
 type Menu = {
-    key: "Works" | "News" | "Contact" | "About" | "Admin" | "Login" | "MyProject" | "Logout";
+    key: "Works" | "Media" | "Contact" | "About" | "Admin" | "Login" | "MyProject" | "Logout";
     label: string;
     sub?: SubMenu[];
     path?: string;
